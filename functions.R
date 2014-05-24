@@ -65,3 +65,5 @@ getMeanAndStdFeatures <- function() {
     
     sort(c(meancols, stdcols))
 }
+
+
