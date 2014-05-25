@@ -34,5 +34,10 @@ The test data contains many records, relating to different test subjects, for ea
 
 The data comes from [this source](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) (link taken directly from project instructions).
 
+It has been transformed as described in the README.md and project instructions for the [Getting and Cleaning Data course](https://class.coursera.org/getdata-003).
+
+The result is described in the variables section of this document, see above.
+
+
 
 ## Cleaning the Data
