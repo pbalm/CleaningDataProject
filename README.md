@@ -11,16 +11,17 @@ The instructions require to make the following steps: Write a script that
 4. Appropriately labels the data set with descriptive activity names. 
 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-These steps are referred to in the run_analysis.R script, indicating when a specific step is completed.
+These steps are referred to in the [run_analysis.R] script, indicating when a specific step is completed.
 
 ## Running the scripts
 
-Note that many steps in the analysis are done in functions, which for readability are in functions.R, so this script
-has to be sourced by run_analysis.R, and to source it, it will have to find it, of course. Therefore, to run the code:
+Note that many steps in the analysis are done in functions, which for readability are in [functions.R], so this script
+has to be sourced by [run_analysis.R], and to source it, it will have to find it, of course. Therefore, to run the code:
 
 - clone the Git repo
 - INSIDE the repo, unzip the data file for this project
 - call setwd("...") to change the working dir of R to the repo directory (which will end with "CleaningDataProject".
+- then source [run_analysis.R]
 
 ## What the scripts do
 
@@ -74,7 +75,7 @@ However the data we have so far looks more like:
 | Walking Upstairs | ... numbers for one subject ... |    |    |   |
 | ... and so on ...  | ...  |    |    |   |
 
-So we have to average the variable columns and correctly reshape to arrive at the tidy data frame. This is what the `buildTidyDataframe` function does -- see `functions.R`.
+So we have to average the variable columns and correctly reshape to arrive at the tidy data frame. This is what the `buildTidyDataframe` function does -- see [functions.R].
 
 ## Finally
 

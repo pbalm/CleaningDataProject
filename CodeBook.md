@@ -1,4 +1,4 @@
-Code Book for the Getting And Cleaning Data
+Code Book for the Getting And Cleaning Data course project
 ===================
 
 This is the Code Book for the course project for Getting And Cleaning Data.
