@@ -1,8 +1,10 @@
+datasetdir = "UCI\ HAR\ Dataset/"
+
 # Helper function to get the datafiles we need to read
 # Call with test or train
 getFilenames <- function(dset) { 
-    xfile = paste(dset, "/X_", dset, ".txt", sep="")
-    yfile = paste(dset, "/y_", dset, ".txt", sep="")
+    xfile = paste(datasetdir, dset, "/X_", dset, ".txt", sep="")
+    yfile = paste(datasetdir, dset, "/y_", dset, ".txt", sep="")
     c(xfile, yfile)
 }
 
@@ -10,13 +12,13 @@ getFilenames <- function(dset) {
 # with the features -- corresponding to the column names in the X data.
 readFeatures <- function() {
     # Read the list of features -- this corresponds to the column names
-    data = read.table("features.txt", stringsAsFactors = FALSE)
+    data = read.table(paste(datasetdir, "features.txt", sep=""), stringsAsFactors = FALSE)
     data$V2    
 }
 
 # Helper to read the activity labels
 readActivityLabels <- function() {
-    act_labels = read.table("activity_labels.txt", stringsAsFactors = FALSE)
+    act_labels = read.table(paste(datasetdir, "activity_labels.txt", sep=""), stringsAsFactors = FALSE)
     names(act_labels) = c("Activity.ID","Activity.Label")
     act_labels
 }
@@ -66,4 +68,39 @@ getMeanAndStdFeatures <- function() {
     sort(c(meancols, stdcols))
 }
 
+# Helper to replace the underscores in strings by a space and capitalize each word.
+# This changes "WALKING_UPSTAIRS" to "Walking Upstairs".
+simpleCap <- function(x) {
+  s <- strsplit(x, "_")[[1]]
+  paste(toupper(substring(s, 1,1)), tolower( substring(s, 2)),
+        sep="", collapse=" ")
+}
+
+# Build one dataframe starting from the labeled data, following the requirements for step 5.
+buildTidyDataframe <- function(labeledData) {
+  # the data without the activity labels and IDs
+  noactdata = labeledData[, 3:ncol(labeledData)]
+  splitlist = split(noactdata, labeledData$activityLabels)
+  splitlistmeans = lapply(splitlist, lapply, mean)
+  # Unlisting gives us a numeric vector with a names for each row: activity[dot]variable
+  vectormeans = unlist(splitlistmeans)
+  # Create the activity column. Unlisting puts the activity in the odd rows and the variable in the even rows
+  columntitles = unlist(sapply(names(vectormeans), strsplit, "\\."))
+  
+  oddrows = seq(1, length(columntitles), 2)
+  evenrows = oddrows + 1
+  
+  # Extract vectors with activity labels and the variable names
+  activitynames = columntitles[oddrows]
+  variables = columntitles[evenrows]
+  
+  # Build the tidy data frace
+  tidydf = data.frame(activitynames, variables, vectormeans)
+  
+  # Remove rownames as they're just a bit messy
+  rownames(tidydf) = NULL
+  
+  # Done!
+  tidydf
+}
 
