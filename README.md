@@ -78,6 +78,6 @@ So we have to average the variable columns and correctly reshape to arrive at th
 
 ## Finally
 
-I also provided the [Code Book](blob/master/CodeBook.md) describing the final tidy dataset. And...
+I also provided the [Code Book](CodeBook.md) describing the final tidy dataset. And...
 
 Many thanks for peer reviewing and good luck to you with your project!
