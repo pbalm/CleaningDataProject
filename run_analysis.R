@@ -23,10 +23,10 @@ source("functions.R")
 
 # Start with the files in the test set
 testdata = readSet(getFilenames("test"))
-#traindata = readSet(getFilenames("train"))
+traindata = readSet(getFilenames("train"))
 
 # Step (1) Result: Merged, appropriately labeled data with test and train sets
-alldata = testdata # rbind(testdata, traindata)
+alldata = rbind(testdata, traindata)
 
 # Now drop columns that are not standard deviation or mean, by subsetting with
 # the desired column names, and that's
@@ -48,9 +48,12 @@ labeledData = cbind(activityLabels, meanAndStdData)
 # descriptive and appropriate. But OK, I'll relabel WALKING_UPSTAIRS to Walking Upstairs using the
 # simpleCap function in functions.R.
 newlevels = sapply(levels(labeledData$activityLabels), simpleCap)
-
-# Step (4) Result: Set the pretty labels on labeledData.
 levels(labeledData$activityLabels)  = newlevels
+
+# Step (4) Result: labeledData now has nice activity labels.
+# I will fix up the variable names when I build the tidy data frame. If
+# I do it now, it completetes the generation of the tidy data frame, because
+# the variable names will then contain dots.
 
 # Building the tidy data frame involves a bit of splitting and recombining... This is done in 
 # the function buildTidyDataframe

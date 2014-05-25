@@ -94,7 +94,10 @@ buildTidyDataframe <- function(labeledData) {
   activitynames = columntitles[oddrows]
   variables = columntitles[evenrows]
   
-  # Build the tidy data frace
+  # Use nice names for the variables
+  variables = sapply(variables, getCleanVarName)
+  
+  # Build the tidy data frame
   tidydf = data.frame(activitynames, variables, vectormeans)
   
   # Remove rownames as they're just a bit messy
@@ -102,5 +105,24 @@ buildTidyDataframe <- function(labeledData) {
   
   # Done!
   tidydf
+}
+
+# Get a clean variable name.
+# tBodyAcc-std()-X  --> tBodyAcc.std.x
+getCleanVarName <- function(varname) {
+    # Remove the brackets
+    varname = gsub("\\(","", varname)
+    varname = gsub("\\)","", varname)
+    
+    # split by dashes
+    varnames = unlist(strsplit(varname, "-"))
+    
+    # last one to lower case (this is X, Y or Z)
+    varnames[length(varnames)] = tolower(varnames[length(varnames)])
+    
+    # now join it back together with dots
+    varname = paste(varnames, collapse=".")
+    
+    varname
 }
 
