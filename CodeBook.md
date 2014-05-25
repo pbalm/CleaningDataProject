@@ -8,17 +8,31 @@ the course project is meant to produce as its final step.
  
 ## The Variables
 
-Activitynames
-: This is
+The tidy data set contains the following columns:
 
-variables
-: this is...
+* `activitynames`
+* `variables`
+* `vectormeans`
 
-vectormeans
-: this is...
+Each are described in a section below.
 
+### Activity names
+
+The source of the information for the `activitynames` is the  `activity_labels.txt` file. The text in that file has been slightly transformat to make it more readable: Underscore were replaced by spaces and it was set in title case.
+
+The labels have been related to the sensor data in this dataset via the activity ID column in the sensor data.
+
+### Variables column
+
+The `variables` column contains selected items from `features_info.txt`. The project says to focus only only means and standard deviations. Therefore, as explained in README.md, only variables containing either "mean" or "std" have been selected.
+
+### Vector means
+
+The test data contains many records, relating to different test subjects, for each variable and given activity. The tidy data summarizes all these records for one activity by averaging the vector of these numbers.
 
 ## The Data
+
+The data comes from [this source](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) (link taken directly from project instructions).
 
 
 ## Cleaning the Data
